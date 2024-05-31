@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Sidebar from "./components/Sidebar.tsx";
 
 export default function Home() {
   const router = useRouter();
@@ -33,6 +34,7 @@ export default function Home() {
   };
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
+     
       <button
         onClick={() => {
           handleLogin();

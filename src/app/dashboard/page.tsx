@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Sidebar from "../components/Sidebar.tsx";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -25,7 +26,7 @@ export default function Dashboard() {
       {
         method: "GET",
         headers: {
-          Authorization: `${token}`,
+          "Authorization": `${token}`,
           "Content-Type": "application/json",
         },
       }
@@ -45,7 +46,7 @@ export default function Dashboard() {
       {
         method: "GET",
         headers: {
-          Authorization: `${token}`,
+          "Authorization": `${token}`,
           "Content-Type": "application/json",
         },
       }
@@ -60,7 +61,8 @@ export default function Dashboard() {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center h-full'>
+    <div className='flex flex-row h-full'>
+       <Sidebar />
       <div className='flex flex-col items-center'>
         <h1 className='text-2xl mb-4'>Dashboard</h1>
         <div className='mt-4'>
