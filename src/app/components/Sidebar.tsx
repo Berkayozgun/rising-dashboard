@@ -8,7 +8,7 @@ import companyLogo from "../risinglogo.png";
 export default function Sidebar() {
   const router = useRouter();
   return (
-    <aside className='bg-gray-50 text-white w-24 h-screen flex flex-col items-center justify-start'>
+    <aside className='bg-gray-50 text-white w-24 h-screen flex flex-col items-center justify-start border-r-2'>
       <button
         onClick={() => {
           router.push("#");

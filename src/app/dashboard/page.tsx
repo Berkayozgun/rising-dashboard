@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "../components/Sidebar.tsx";
+import AdAlert from "../components/AdAlert.tsx";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -26,7 +27,7 @@ export default function Dashboard() {
       {
         method: "GET",
         headers: {
-          "Authorization": `${token}`,
+          Authorization: `${token}`,
           "Content-Type": "application/json",
         },
       }
@@ -46,7 +47,7 @@ export default function Dashboard() {
       {
         method: "GET",
         headers: {
-          "Authorization": `${token}`,
+          Authorization: `${token}`,
           "Content-Type": "application/json",
         },
       }
@@ -61,17 +62,37 @@ export default function Dashboard() {
   };
 
   return (
-    <div className='flex flex-row h-full'>
-       <Sidebar />
-      <div className='flex flex-col items-center'>
-        <h1 className='text-2xl mb-4'>Dashboard</h1>
-        <div className='mt-4'>
-          <h2 className='text-xl'>Table Data</h2>
-          <pre>{JSON.stringify(tableData, null, 2)}</pre>
-        </div>
-        <div className='mt-4'>
-          <h2 className='text-xl'>Info Data</h2>
-          <pre>{JSON.stringify(infoData, null, 2)}</pre>
+    <div className='flex flex-row w-full h-full  text-black bg-slate-50'>
+      <Sidebar />
+
+      <div className='flex flex-col justify-start items-center gap-4 w-full border'>
+        <AdAlert />
+
+        <h1 className='text-2xl font-bold mt-4 w-7/12 text-start'>
+          Proxies & Scraping Infrastructure
+        </h1>
+
+        <div class='text-sm font-medium w-7/12 text-center  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700'>
+          <ul class='flex flex-wrap -mb-px'>
+            <li class='mx-2'>
+              <a
+                href='#'
+                class='inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'
+              >
+                My Proxies
+              </a>
+            </li>
+            <li class='me-2'>
+              <a
+                href='#'
+                class='inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500'
+                aria-current='page'
+              >
+                Dashboard
+              </a>
+            </li>
+           
+          </ul>
         </div>
       </div>
     </div>
