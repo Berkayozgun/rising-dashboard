@@ -85,7 +85,7 @@ export default function Dashboard() {
             <li class='me-2'>
               <a
                 href='#'
-                class='inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500'
+                class='inline-block p-4 text-blue-600 border-b-4 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500'
                 aria-current='page'
               >
                 Dashboard
