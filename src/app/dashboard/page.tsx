@@ -91,9 +91,35 @@ export default function Dashboard() {
                 Dashboard
               </a>
             </li>
-           
           </ul>
         </div>
+        <div className='flex flex-row w-7/12 justify-between'>
+        {infoData ? (
+          <div className='flex flex-row gap-4'>
+            <div className='flex flex-col bg-blue-200 rounded-lg w-52 h-32 text-sm p-4'>
+              Subscription expires on
+                {infoData.expireTime}
+            </div>
+            <div className='flex flex-col bg-blue-200 rounded-lg w-52 h-32 text-sm p-4'>
+                Last Charge
+                {infoData.lastChargeAmount} {" "}
+                {infoData.lastCharge} {" "}
+              </div>
+            <div className='flex flex-col bg-blue-200 rounded-lg w-52 h-32 text-sm p-4'>
+                Total Usage Data
+                {infoData.totalDataUsage}GB {" "}
+              </div>
+            <div className='flex flex-col bg-blue-200 rounded-lg w-52 h-32 text-sm p-4'>
+
+                Daily Usage Data
+                {infoData.dailyUsage}GB {" "}
+              </div>  
+            </div>
+          ) : (
+            <p>Loading...</p>
+          )}
+        </div>
+       
       </div>
     </div>
   );
