@@ -1,4 +1,4 @@
-export async function fetchTableData(token) {
+export async function fetchTableData(token: string) {
   const response = await fetch("https://recruitment-api.vercel.app/get-table", {
     method: "GET",
     headers: {
@@ -19,7 +19,7 @@ export async function fetchTableData(token) {
   }
 }
 
-export async function fetchInfoData(token) {
+export async function fetchInfoData(token: string) {
   const response = await fetch("https://recruitment-api.vercel.app/get-info", {
     method: "GET",
     headers: {
