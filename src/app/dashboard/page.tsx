@@ -36,6 +36,9 @@ export default function Dashboard() {
 
     const data = await response.json();
     if (response.ok) {
+      data.data.forEach((item) => {
+        item.date = formatDate(item.date);
+      });
       setTableData(data);
     } else {
       console.error(data.message);
@@ -62,11 +65,40 @@ export default function Dashboard() {
     }
   };
 
+  const formatDate = (dateTimeString) => {
+    const date = new Date(dateTimeString);
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
+  };
+
+  const formatGB = (data) => {
+    return (data / 1024).toLocaleString("en-US", {
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3,
+    });
+  };
+
   return (
     <div className='flex flex-row w-full h-full  text-black bg-slate-50'>
       <Sidebar />
 
-      <div className='flex flex-col justify-start items-center gap-4 w-full border'>
+      <div className='flex flex-col  items-center gap-4 w-full border'>
         <AdAlert />
 
         <h1 className='text-2xl font-bold mt-4 w-7/12 text-start'>
@@ -74,7 +106,7 @@ export default function Dashboard() {
         </h1>
 
         <div className='text-sm font-medium w-7/12 text-center  text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700'>
-          <ul className='flex flex-wrap -mb-px'>
+          <ul className='flex'>
             <li className='mx-2'>
               <a
                 href='#'
@@ -94,56 +126,79 @@ export default function Dashboard() {
             </li>
           </ul>
         </div>
-        <div className='flex flex-row w-7/12 justify-between'>
+        <div className='flex flex-row w-7/12'>
           {infoData ? (
-            <div className='flex flex-row gap-4'>
-              <div className='flex flex-col bg-blue-200 rounded-lg w-52 h-32 text-sm p-4'>
+            <div className='flex flex-row justify-between gap-14'>
+              <div className='flex flex-col font-sans justify-around font-semibold leading-5 bg-blue-200 rounded-lg h-24 text-sm w-full p-4'>
                 Subscription expires on
-                {infoData.expireTime}
+                <div className='text-xl font-sans leading-9 font-medium'>
+                  {infoData.expireTime}
+                </div>
               </div>
-              <div className='flex flex-col bg-blue-200 rounded-lg w-52 h-32 text-sm p-4'>
-                Last Charge
-                {infoData.lastChargeAmount} {infoData.lastCharge}{" "}
+
+              <div className='flex flex-col font-sans justify-around bg-blue-200 rounded-lg h-24 text-sm w-full p-4'>
+                <span className='flex font-sans font-semibold leading-5'>
+                  Last charge
+                </span>
+                <div className='flex flex-row w-full'>
+                  <span className='flex leading-9 text-xl'>
+                    {infoData.lastChargeAmount}&nbsp;
+                  </span>
+                  <span className='flex text-nowrap leading-9 text-sm'>
+                    {infoData.lastCharge}
+                  </span>
+                </div>
               </div>
-              <div className='flex flex-col bg-blue-200 rounded-lg w-52 h-32 text-sm p-4'>
-                Total Usage Data
-                {infoData.totalDataUsage}GB{" "}
+
+              <div className='flex flex-col font-sans justify-around font-semibold leading-5 bg-blue-200 rounded-lg w-full  h-24 text-sm p-4'>
+                <span className='text-sm leading-5 font-bold'>
+                  Total Usage Data
+                </span>
+                <div className='text-2xl font-bold leading-9'>
+                  {formatGB(infoData.totalDataUsage)} GB
+                </div>
               </div>
-              <div className='flex flex-col bg-blue-200 rounded-lg w-52 h-32 text-sm p-4'>
-                Daily Usage Data
-                {infoData.dailyUsage}GB{" "}
+
+              <div className='flex flex-col font-sans justify-around font-semibold leading-5 bg-blue-200 rounded-lg  w-full h-24 text-sm p-4'>
+                <span className='text-sm leading-5 font-bold'>
+                  Daily Usage Data
+                </span>
+                <div className='text-2xl font-bold leading-9'>
+                  {formatGB(infoData.dailyUsage)} GB
+                </div>
               </div>
             </div>
           ) : (
             <p>Loading...</p>
           )}
         </div>
-        <Chart />
+        {/* <Chart />*/}
 
-        <div className='w-7/12 flex flex-col'>
-          Transactions History
-          <table className='w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400'>
-            <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+        <div className='w-7/12 flex flex-col bg-white p-8'>
+          <span className='text-xl font-semibold ml-4'>Transactions History</span>
+
+          <table className='w-full text-xs text-center'>
+            <thead className='text-xs text-gray-700 bg-white'>
               <tr>
-                <th scope='col' className='px-6 py-3'>
+                <th scope='col' className='p-4'>
                   Type
                 </th>
-                <th scope='col' className='px-6 py-3'>
+                <th scope='col' className='p-4'>
                   Location
                 </th>
-                <th scope='col' className='px-6 py-3'>
+                <th scope='row' className='p-4'>
                   Rental Period
                 </th>
-                <th scope='col' className='px-6 py-3'>
+                <th scope='col' className='p-4'>
                   Number of IP
                 </th>
-                <th scope='col' className='px-6 py-3'>
+                <th scope='col' className='p-4'>
                   Specific Purpose
                 </th>
-                <th scope='col' className='px-6 py-3'>
+                <th scope='col' className='p-4'>
                   Date
                 </th>
-                <th scope='col' className='px-6 py-3'>
+                <th scope='col' className='p-4'>
                   Actions
                 </th>
               </tr>
@@ -151,17 +206,14 @@ export default function Dashboard() {
             <tbody>
               {tableData &&
                 tableData.data.map((item, index) => (
-                  <tr
-                    key={index}
-                    className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'
-                  >
-                    <td className='px-6 py-4'>{item.type}</td>
-                    <td className='px-6 py-4'>{item.location}</td>
-                    <td className='px-6 py-4'>{item.rental}</td>
-                    <td className='px-6 py-4'>{item.ipcount}</td>
-                    <td className='px-6 py-4'>{item.purpose}</td>
-                    <td className='px-6 py-4'>{item.date}</td>
-                    <select className='px-6 py-4'>
+                  <tr key={index} className='bg-white border-b'>
+                    <td className=''>{item.type}</td>
+                    <td className=''>{item.location}</td>
+                    <td className=''>{item.rental}</td>
+                    <td className=''>{item.ipcount}</td>
+                    <td className=''>{item.purpose}</td>
+                    <td className=''>{item.date}</td>
+                    <select className='w-28 h-12 rounded-xl m-2 border-none drop-shadow-xl text-sm'>
                       <option value='1'>Actions</option>
                       <option value='2'>Processing</option>
                       <option value='3'>In Progress</option>
