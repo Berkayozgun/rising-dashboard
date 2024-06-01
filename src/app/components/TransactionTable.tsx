@@ -1,8 +1,20 @@
 import TransactionRow from "./TransactionRow";
-
 import React from "react";
 
-function TransactionTable({ data }) {
+interface Transaction {
+  type: string;
+  location: string;
+  rental: string;
+  ipcount: number;
+  purpose: string;
+  date: string;
+}
+
+interface TransactionTableProps {
+  data?: Transaction[];
+}
+
+function TransactionTable({ data }: TransactionTableProps) {
   return (
     <div className='w-7/12 flex flex-col bg-white p-8'>
       <span className='text-xl font-semibold ml-4'>Transactions History</span>
@@ -33,10 +45,9 @@ function TransactionTable({ data }) {
           </tr>
         </thead>
         <tbody>
-          {data &&
-            data.map((item, index) => (
-              <TransactionRow key={index} item={item} />
-            ))}
+        {data?.map((item, index) => (
+            <TransactionRow key={index} item={item} />
+          ))}
         </tbody>
       </table>
     </div>

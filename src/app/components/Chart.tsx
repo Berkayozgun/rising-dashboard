@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import "tailwindcss/tailwind.css";
-import "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 
 interface ChartProps{
   options: ApexOptions;
 }
+
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false, // SSR sırasında bileşenin yüklenmemesi için
+});
 
 const options: ApexOptions = {
   chart: {
@@ -79,9 +81,7 @@ const options: ApexOptions = {
   },
 };
 
-const ReactApexChart = dynamic(() => import("react-apexcharts"), {
-  ssr: false,
-});
+
 
 const UserChart = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -99,38 +99,38 @@ const UserChart = () => {
     },
   ];
 
-
   if (!isMounted) {
     return null;
   }
 
   try {
-    return (
-      <div className='w-7/12 bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6'>
-        <div className='flex justify-between'>
-          <div>
-            <p className='text-base font-bold text-black dark:text-gray-400'>
-              Data usage per network
-            </p>
+    if (typeof window !== "undefined") {
+      return (
+        <div className='w-7/12 bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6'>
+          <div className='flex justify-between'>
+            <div>
+              <p className='text-base font-bold text-black dark:text-gray-400'>
+                Data usage per network
+              </p>
+            </div>
           </div>
-        </div>
-        <div id='area-chart'>
-          {typeof window !== "undefined" && (
+          <div id='area-chart'>
             <ReactApexChart
               options={options}
               series={options.series || defaultSeries}
               type='area'
               height={443}
             />
-          )}
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return null;
+    }
   } catch (error) {
     console.error("Error rendering chart:", error);
     setHasError(true);
     return null;
   }
 };
-
 export default UserChart;

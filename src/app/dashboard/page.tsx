@@ -1,16 +1,26 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Sidebar from "../components/Sidebar.tsx";
-import AdAlert from "../components/AdAlert.tsx";
-import Chart from "../components/Chart.tsx";
-import InfoData from "../components/InfoData.tsx";
-import TransactionTable from "../components/TransactionTable.tsx";
-import { fetchTableData, fetchInfoData } from "../api/api.ts";
+import Sidebar from "../components/Sidebar";
+import AdAlert from "../components/AdAlert";
+import Chart from "../components/Chart";
+import InfoData from "../components/InfoData";
+import TransactionTable from "../components/TransactionTable";
+import { fetchTableData, fetchInfoData } from "../api/api";
 
 export default function Dashboard() {
+  interface Transaction {
+    type: string;
+    location: string;
+    rental: string;
+    ipcount: number;
+    purpose: string;
+    date: string;
+  }
   const router = useRouter();
-  const [tableData, setTableData] = useState(null);
+  const [tableData, setTableData] = useState<{ data: Transaction[] } | null>(
+    null
+  );
   const [infoData, setInfoData] = useState(null);
   const [jwt, setJwt] = useState("");
 
@@ -22,16 +32,16 @@ export default function Dashboard() {
       setJwt(token);
       fetchData(token);
     }
-  }, []);
+  }, [router]);
 
-  const fetchData = async (token) => {
+  const fetchData = async (token: any) => {
     const tableData = await fetchTableData(token);
     const infoData = await fetchInfoData(token);
     setTableData(tableData);
     setInfoData(infoData);
   };
 
-  function formatGB(data) {
+  function formatGB(data: any) {
     return (data / 1024).toLocaleString("en-US", {
       minimumFractionDigits: 3,
       maximumFractionDigits: 3,
@@ -74,7 +84,7 @@ export default function Dashboard() {
           {infoData ? <InfoData infoData={infoData} /> : <p>Loading...</p>}
         </div>
         <Chart />
-        <TransactionTable data={tableData?.data} />
+        <TransactionTable data={tableData?.data ?? []} />
       </div>
     </div>
   );
