@@ -39,14 +39,14 @@ const LoginForm = () => {
         placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        className="p-2 border border-gray-300 rounded-lg"
+        className="p-2 border border-gray-300 text-black rounded-lg"
       />
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="p-2 border border-gray-300 rounded-lg"
+        className="p-2 border border-gray-300 text-black rounded-lg"
       />
       {error && <p className="text-red-500 text-sm">{error}</p>}
       <button
