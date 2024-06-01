@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import "tailwindcss/tailwind.css";
 import "react-apexcharts";
+import { ApexOptions } from "apexcharts";
 
 interface ChartProps{
   options: ApexOptions;
