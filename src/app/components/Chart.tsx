@@ -11,7 +11,7 @@ interface ChartProps{
 const options: ApexOptions = {
   chart: {
     height: "100%",
-    maxWidth: "100%",
+    width: "100%",
     type: "area",
     fontFamily: "Inter, sans-serif",
     dropShadow: {
