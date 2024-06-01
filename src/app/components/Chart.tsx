@@ -88,7 +88,7 @@ const UserChart = () => {
     yaxis: {
       show: true,
       labels: {
-        formatter: function (value) {
+        formatter: function (value:any) {
           return value + " GB";
         },
       },
