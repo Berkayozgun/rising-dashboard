@@ -37,7 +37,7 @@ export async function fetchInfoData(token: string) {
   }
 }
 
-function formatDate(dateTimeString) {
+function formatDate(dateTimeString: any) {
   const date = new Date(dateTimeString);
   const months = [
     "Jan",
