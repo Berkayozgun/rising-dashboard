@@ -8,7 +8,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = async (e: any) => {
+  const handleLogin = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
       const response = await fetch("https://recruitment-api.vercel.app/login", {
@@ -27,7 +27,7 @@ const LoginForm = () => {
         const errorData = await response.json();
         setError(errorData.message || "Login failed");
       }
-    } catch (error) {
+    } catch (error:any) {
       setError("Error during login: " + error.message);
     }
   };
