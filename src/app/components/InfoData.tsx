@@ -1,7 +1,11 @@
 import React from "react";
 
-function InfoData({ infoData }) {
-  const formatGB = (data) => {
+interface InfoDataProps {
+  infoData: any;
+}
+
+function InfoData({ infoData }: InfoDataProps) {
+  const formatGB = (data: number) => {
     return (data / 1024).toLocaleString("en-US", {
       minimumFractionDigits: 3,
       maximumFractionDigits: 3,
