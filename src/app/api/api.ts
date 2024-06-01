@@ -9,7 +9,7 @@ export async function fetchTableData(token: string) {
 
   const data = await response.json();
   if (response.ok) {
-    data.data.forEach((item) => {
+    data.data.forEach((item: any) => {
       item.date = formatDate(item.date);
     });
     return data;
