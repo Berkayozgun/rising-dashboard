@@ -3,6 +3,10 @@ import dynamic from "next/dynamic";
 import "tailwindcss/tailwind.css";
 import "react-apexcharts";
 
+interface ChartProps{
+  options: ApexOptions;
+}
+
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
