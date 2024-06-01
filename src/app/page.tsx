@@ -24,7 +24,7 @@ export default function Home() {
         setJwt(data.jwt);
         sessionStorage.setItem("jwt", data.jwt);
         router.push("/dashboard");
-        console.log("Login successful");
+        
       } else {
         console.error("Login failed");
       }
@@ -34,7 +34,7 @@ export default function Home() {
   };
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-     
+      
       <button
         onClick={() => {
           handleLogin();

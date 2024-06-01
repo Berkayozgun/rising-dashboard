@@ -8,7 +8,7 @@ export default function AdAlert() {
           className='flex items-center w-7/12 h-12 mt-4 bg-blue-100 rounded-lg justify-between'
           role='alert'
         >
-          <div class='ms-3 text-sm font-medium flex'>
+          <div className='ms-3 text-sm font-medium flex'>
           Special Offer!  Get Complete Free Proxy 10 MB Proxy, without credit card. &nbsp;
           <a href="#" className="underline"> Start Free Trial </a>
           </div>
@@ -18,9 +18,9 @@ export default function AdAlert() {
             data-dismiss-target='#alert-border-1'
             aria-label='Close'
           >
-            <span class='sr-only'>Dismiss</span>
+            <span className='sr-only'>Dismiss</span>
             <svg
-              class='w-3 h-3'
+              className='w-3 h-3'
               aria-hidden='true'
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -28,9 +28,9 @@ export default function AdAlert() {
             >
               <path
                 stroke='currentColor'
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
                 d='m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6'
               />
             </svg>
