@@ -55,6 +55,11 @@ const LoginForm = () => {
       >
         Login
       </button>
+      <div className="text-sm text-gray-500 mt-2">
+        Demo Credentials: <br />
+        Username: <strong>admin</strong> <br />
+        Password: <strong>admin123</strong>
+      </div>
     </form>
   );
 };
